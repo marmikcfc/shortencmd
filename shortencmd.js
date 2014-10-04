@@ -20,17 +20,17 @@ prog.on('--help', function() {
   shell.echo('  ' + 'Example Usage:'.underline);
   shell.echo('');
   shell.echo('  > Add new command and its shortcut'.blue);
-  shell.echo('    $ sc -a "node -> n"'.green);
+  shell.echo('    $ scmd -a "node -> n"'.green);
   shell.echo('  > Execute a shortcut'.blue);
-  shell.echo('    $ sc -ex "n"'.green);
+  shell.echo('    $ scmd -ex "n"'.green);
   shell.echo('  > Print saved shortcuts'.blue);
-  shell.echo('    $ sc -p'.green);
+  shell.echo('    $ scmd -p'.green);
   shell.echo('  > Remove a shortcut'.blue);
-  shell.echo('    $ sc -r "n"'.green);
+  shell.echo('    $ scmd -r "n"'.green);
   shell.echo('  > Export your genricmd shortcuts'.blue);
-  shell.echo('    $ sc -e'.green);
+  shell.echo('    $ scmd -e'.green);
   shell.echo('  > import shortencmd shortcuts'.blue);
-  shell.echo('    $ sc -i \'[{"command":"node","shortcut":"n"},{"command":"ls -ltr","shortcut":"l"}]\''.green);
+  shell.echo('    $ scmd -i \'[{"command":"node","shortcut":"n"},{"command":"ls -ltr","shortcut":"l"}]\''.green);
   shell.echo('');
 });
 
@@ -170,25 +170,25 @@ function _print(commands) {
 function helpAdd() {
   shell.echo('');
   shell.echo('  > Add new command and its shortcut'.blue);
-  shell.echo('    $ sc -a "node -> n"'.blue);
+  shell.echo('    $ scmd -a "node -> n"'.blue);
 }
 
 function helpRemove() {
   shell.echo('');
   shell.echo('  > Remove a shortcut'.blue);
-  shell.echo('    $ sc -r "n"'.blue);
+  shell.echo('    $ scmd -r "n"'.blue);
 }
 
 function helpImport() {
   shell.echo('  > import shortencmd shortcuts'.blue);
-  shell.echo('    $ sc -i \'[{"command":"node","shortcut":"n"},{"command":"ls -ltr","shortcut":"l"}]\''.green);
+  shell.echo('    $ scmd -i \'[{"command":"node","shortcut":"n"},{"command":"ls -ltr","shortcut":"l"}]\''.green);
 }
 
 function executeCommand(_x, _m) {
   if (_x == 'null') {
     shell.echo('Please enter a valid shortcut to execute'.red);
     shell.echo('To see a list of saved shortcuts, run '.blue);
-    shell.echo('    $ sc -p'.green);
+    shell.echo('    $ scmd -p'.green);
   } else {
     var _c = JSON.parse(fs.readFileSync(file)),
       command;
@@ -202,9 +202,9 @@ function executeCommand(_x, _m) {
       shell.echo(msg.green);
       if (command.indexOf('*') > 0) {
         if (_m == "1") {
-          command = processCommand(command, 4);
+          command = processcmdommand(command, 4);
         } else {
-          command = processCommand(command, 3);
+          command = processcmdommand(command, 3);
         }
         shell.exec(command);
       } else {
@@ -228,7 +228,7 @@ function checkDuplicate(_c, _o) {
   return true;
 }
 
-function processCommand(command, _c) {
+function processcmdommand(command, _c) {
 
   if (prog.rawArgs.length > _c && command.match(/\*/g).length + _c == prog.rawArgs.length) {
     var _d = command.split('*').filter(function(e) {
