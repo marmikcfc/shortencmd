@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "preferGlobal": "true",
   "bin": {
-    "sc": "shortencmd.js"
+    "scmd": "shortencmd.js"
   },
   "main": "shortencmd.js",
   "description": "User defined shortcuts for CLI commands!",
